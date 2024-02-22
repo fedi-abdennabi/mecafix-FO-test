@@ -371,7 +371,7 @@ export const PageFolder = () => {
                                             </ModalFooter>
                                         </ModalContent>
                                     </Modal>
-                                    <button style={{ margin: '0 8px' }} onClick={() => navigate(`./history-404`)}><HiRefresh /></button>
+                                    <button style={{ margin: '0 8px' }} onClick={() => navigate(`./history`)}><HiRefresh /></button>
                                 </Flex>
                             </Flex>
                         </PageTopBar>
@@ -416,7 +416,7 @@ export const PageFolder = () => {
                         </Card>
                         <Stack direction={'row'} spacing='4px' w="full" paddingBottom='3'>
                             <Flex flex={18} p='10px'>
-                                <Button w='full' colorScheme='blue' onClick={() => navigate(`/admin/card/update-404/${folderId}`)}>{t('account:folder.card-button')}</Button>
+                                <Button w='full' colorScheme='blue' onClick={() => navigate(`/admin/card/update/${folderId}`)}>{t('account:folder.card-button')}</Button>
                             </Flex>
                             <Flex flex={10} p='10px'>
                                 <Button w='full' colorScheme='blue' onClick={onOpenModal}>Hashtag</Button>

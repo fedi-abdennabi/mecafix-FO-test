@@ -62,7 +62,7 @@ const PageHome = () => {
                     </Flex>
                     <Flex>
                         <Button onClick={() => navigate("/admin/Clients/addClient")} colorScheme='blue' ml={"12px"} mr={"12px"} w={"200px"} h={"100px"} mt={"10px"} ><HiUserAdd size={"50px"} /></Button>
-                        <Button onClick={() => navigate("/admin/card-404")} colorScheme='blue' ml={"12px"} mr={"12px"} w={"200px"} h={"100px"} mt={"10px"} ><HiTruck size={"50px"} /></Button>
+                        <Button onClick={() => navigate("/admin/card")} colorScheme='blue' ml={"12px"} mr={"12px"} w={"200px"} h={"100px"} mt={"10px"} ><HiTruck size={"50px"} /></Button>
                         <Button onClick={() => navigate("/admin/folder/generatepdf")} colorScheme='blue' ml={"12px"} mr={"12px"} w={"200px"} h={"100px"} mt={"10px"} ><HiDocumentAdd size={"50px"} /></Button>
                     </Flex>
                     <Stack direction={'row'} justifyContent='space-between'>

@@ -111,18 +111,18 @@ export const MainMenu = ({ ...rest }) => {
             {t('mainMenu:Home')}
           </MainMenuItem>
           <MainMenuItem
-            baseHref="/admin/Park-404"
+            baseHref="/admin/Park"
             style={{ paddingLeft: '30px' }}
-            to="/admin/Park-404"
+            to="/admin/Park"
             display={'flex'}
           >
             <HiOfficeBuilding size={'1.3rem'} style={{ marginRight: '7px' }} />{' '}
             {t('mainMenu:Park')}
           </MainMenuItem>
           <MainMenuItem
-            baseHref="/admin/Clients-404"
+            baseHref="/admin/Clients"
             style={{ paddingLeft: '30px' }}
-            to="/admin/Clients-404"
+            to="/admin/Clients"
             display={'flex'}
           >
             <HiUser size={'1.3rem'} style={{ marginRight: '7px' }} />{' '}
@@ -201,9 +201,9 @@ export const MainMenu = ({ ...rest }) => {
             {t('mainMenu:UsersManagement')}
           </MainMenuItem>
           <MainMenuItem
-            baseHref="/superAdmin/configuration-404"
+            baseHref="/superAdmin/configuration"
             style={{ paddingLeft: '30px' }}
-            to="/superAdmin/configuration-404"
+            to="/superAdmin/configuration"
             display={'flex'}
           >
             <HiOutlineAdjustments

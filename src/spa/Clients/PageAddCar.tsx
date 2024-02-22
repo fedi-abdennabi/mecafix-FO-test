@@ -8,39 +8,49 @@ import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useCarCreate } from '../Car/cars.service';
 import { useToastError, useToastSuccess } from '@/components/Toast';
+import { FieldImage64bit } from '@/components/FieldImage64bit';
+
+interface ErrorResponse {
+    immatriculation: string[];
+  }
 
 export const PageAddCar = () => {
     const { t } = useTranslation(['common', 'car', 'account']);
     const navigate = useNavigate();
     const { clientId } = useParams();
     const myForm = useForm();
+    const isValidRegistrationFormat = (value:TODO) => {
+        const pattern = /^[0-9]{4}-[A-Za-z]{2}-[0-9]{4}$/;
+        return pattern.test(value);
+    };
+
     const toastError = useToastError();
     const toastSuccess = useToastSuccess();
     const { mutate: createCar } = useCarCreate(
-      {
-        onError: (error) => {
-          if (error.response) {
-            toastError({
-              title:
-                (error?.response?.data as string) ||
-                t('common:use.errorOccurred'),
-            });
-          }
-        },
-        onSuccess: () => {
-          toastSuccess({
-            title: t('account:car.SuccessAdd'),
-          });
-          navigate(`/admin/clients/showClient/${clientId}`);
-        },
-      }
+        {
+            onError: (error) => {
+                if (error.response) {
+                    toastError({
+                        title:
+                            (error?.response?.data as ErrorResponse)?.immatriculation?.[0] ||
+                            t('common:use.errorOccurred'),
+                    });
+                }
+            },
+            
+            onSuccess: () => {
+                toastSuccess({
+                    title: t('account:car.SuccessAdd'),
+                });
+                navigate(`/admin/clients/showClient/${clientId}`);
+            },
+        }
     );
-
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
 
-    const handleSubmit = (values:TODO) => {
+    const handleSubmit = (values: TODO) => {
         createCar({ ...values, clientId });
     };
 
@@ -62,9 +72,15 @@ export const PageAddCar = () => {
                     >
                         <Stack spacing="4" mt="8">
                             <FieldInput
-                                name="registration"
+                                name="immatriculation"
                                 label={t('account:car.registration.label')}
                                 required={t('account:car.registration.required') as string}
+                                validations={[
+                                    {
+                                        rule: (value) => isValidRegistrationFormat(value),
+                                        message: t('account:car.registration.invalidFormat'),
+                                    },
+                                ]}
                             />
                             <FieldInput
                                 name="carType"
@@ -74,13 +90,14 @@ export const PageAddCar = () => {
                                 <FieldInput
                                     name="brand"
                                     label={t('account:car.brand.label')}
+                                    required
                                 />
 
                                 <FieldInput
                                     name="model"
                                     label={t('account:car.model.label')}
+                                    required
                                 />
-
                             </Stack>
                             <Stack direction={{ base: 'column', sm: 'row' }} spacing="6">
                                 <FieldInput name="box" label={t('account:car.box')} />
@@ -103,6 +120,9 @@ export const PageAddCar = () => {
                                         },
                                     ]}
                                 />
+                            </Stack>
+                            <Stack>
+                                <FieldImage64bit name="picture" label={t('account:car.picture')} />
                             </Stack>
                             <Button style={{ margin: '24px 2px' }} colorScheme='blue' type='submit'>{t('account:carte.submit-button')}</Button>
                         </Stack>

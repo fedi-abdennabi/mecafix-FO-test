@@ -59,16 +59,19 @@ const PageUpdateClient = () => {
       <PageContent>
         <PageTopBar m="1" showBack onBack={() => navigate(-1)}>
         </PageTopBar>
-        <Formiz autoForm onValidSubmit={submitUpdateClient} initialValues={{
-          type: client?.type || '',
-          firstName: client?.firstName || '',
-          lastName: client?.lastName || '',
-          email: client?.email || '',
-          phone: client?.phone || '',
-          adress: client?.adress || '',
-          city: client?.city || '',
-          postalCode: client?.postalCode || ''
-        }} >
+        <Formiz key={client?.id || 'new-client'}
+          autoForm
+          onValidSubmit={submitUpdateClient}
+          initialValues={{
+            type: client?.type || '',
+            firstName: client?.firstName || '',
+            lastName: client?.lastName || '',
+            email: client?.email || '',
+            phone: client?.phone || '',
+            adress: client?.adress || '',
+            city: client?.city || '',
+            postalCode: client?.postalCode || '',
+          }} >
           <Box
             p="6"
             borderRadius="md"
@@ -98,6 +101,7 @@ const PageUpdateClient = () => {
                   },
                 ]}
                 onChange={handleTypeChange}
+                required
               />
 
               {!isCompany && (
@@ -105,11 +109,13 @@ const PageUpdateClient = () => {
                   <FieldInput
                     name="firstName"
                     label={t('account:client.firstname')}
+                    required
                   />
                   <FieldInput
                     name="lastName"
                     label={t('account:client.lastname')}
                     defaultValue={client?.lastName}
+                    required
                   />
                 </>
               )}
@@ -118,6 +124,7 @@ const PageUpdateClient = () => {
                   <FieldInput
                     name="campanyName"
                     label={t('account:client.company.label')}
+                    required
                   />
                 )}
                 <FieldInput
@@ -137,6 +144,7 @@ const PageUpdateClient = () => {
                       message: t('account:data.email.tooLong', { min: 254 }),
                     },
                   ]}
+                  required
                 />
               </Stack>
               <Stack direction={{ base: 'column', sm: 'row' }} spacing="6">
@@ -149,11 +157,13 @@ const PageUpdateClient = () => {
                       message: t('account:client.phoneNumber.isNumber'),
                     },
                   ]}
+                  required
                 />
                 {isCompany && (
                   <FieldInput
                     name="registrationNumber"
                     label={t('account:client.RegistrationNumber')}
+                    required
                   />
                 )}
               </Stack>
@@ -162,10 +172,12 @@ const PageUpdateClient = () => {
                   <FieldInput
                     name="sectorOfActivity"
                     label={t('account:client.SectorOfActivity')}
+                    required
                   />
                   <FieldInput
                     name="headquartersAddress"
                     label={t('account:client.HeadquartersAddress')}
+                    required
                   />
                 </Stack>
               )}

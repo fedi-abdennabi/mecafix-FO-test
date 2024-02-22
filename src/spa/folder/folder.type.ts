@@ -1,7 +1,7 @@
 import { Car } from "../Car/car.type"
 import { Categorys } from "../Categories/categories.type"
 import { Clients } from "../Clients/client.type"
-import { status } from "../carStatus/carStatus.type"
+import { Status } from "../carStatus/carStatus.type"
 
 export type Folder = {
     id: number,
@@ -13,7 +13,7 @@ export type Folder = {
     mileage?: number,
     panne?: boolean,
     notesVocal?: string,
-    created_at?: Date,
+    created_at: Date,
     updated_at?: Date,
     statusId?: number,
     statusValue?: string,
@@ -23,7 +23,7 @@ export type Folder = {
     car:Car,
     clients:Clients,
     category:Categorys[],
-    status?:status
+    status?:Status
 }
 
 export type FolderList = {

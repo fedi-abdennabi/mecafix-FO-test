@@ -17,16 +17,19 @@ import {
 import { PageActivate } from './account/PageActivate';
 import { useAuthContext } from './auth/AuthContext';
 import FolderRoutes from './folder/folder.route';
+import { useAccount } from './account/account.service';
 
 const AdminRoutes = React.lazy(() => import('@/spa/admin/AdminRoutes'));
+const ClientRoutes = React.lazy(() => import('@/spa/client/ClientRoutes'));
 const AccountRoutes = React.lazy(() => import('@/spa/account/AccountRoutes'));
 const SuperAdminRoutes = React.lazy(() => import('@/spa/superAdmin/account/accountRoutes'));
-const DashboardRoutes = React.lazy(
-  () => import('@/spa/dashboard/DashboardRoutes')
+const DashboardRoutes = React.lazy(() => import('@/spa/dashboard/DashboardRoutes')
 );
 
 export const App = () => {
   const { isAuthenticated } = useAuthContext();
+  const role = localStorage.getItem('role');
+
   return (
     <ErrorBoundary>
       <BrowserRouter basename="/app">
@@ -37,7 +40,10 @@ export const App = () => {
                 path="/"
                 element={
                   <Navigate
-                    to={isAuthenticated ? '/admin' : '/login'}
+                    to={
+                      isAuthenticated && (role === 'admin' || role==='client') ? '/admin/home' :
+                        isAuthenticated && role === 'superAdmin' ? '/superAdmin/users' : '/login'
+                    }
                     replace
                   />
                 }
@@ -60,7 +66,6 @@ export const App = () => {
                   </PublicOnlyRouteGuard>
                 }
               />
-
 
               <Route
                 path="logout"
@@ -88,7 +93,16 @@ export const App = () => {
                   </AuthenticatedRouteGuard>
                 }
               />
-              
+
+              <Route
+                path="client/*"
+                element={
+                  <AuthenticatedRouteGuard>
+                    <ClientRoutes />
+                  </AuthenticatedRouteGuard>
+                }
+              />
+
               <Route
                 path="superAdmin/*"
                 element={
@@ -107,7 +121,12 @@ export const App = () => {
                 }
               />
 
-              <Route path="*" element={<ErrorPage errorCode={404} />} />
+              <Route
+                path="*"
+                element={
+                  <ErrorPage errorCode={404} />
+                }
+              />
             </Routes>
           </Suspense>
         </Layout>

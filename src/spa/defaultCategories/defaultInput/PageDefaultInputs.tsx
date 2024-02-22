@@ -4,14 +4,14 @@ import { Page, PageContent, PageTopBar } from "@/spa/layout"
 import { HStack, Heading } from "@chakra-ui/react"
 import { useTranslation } from "react-i18next"
 import { useNavigate, useParams } from "react-router-dom"
-import {  useDefaultInputCreate, useDefaultInputDecrementOrder, useDefaultInputDelete, useDefaultInputDetails, useDefaultInputDisplayToClient, useDefaultInputIncrementOrder, useDefaultInputList, useDefaultInputUpdate } from "./DefaultInputs.service"
+import { useDefaultInputCreate, useDefaultInputDecrementOrder, useDefaultInputDelete, useDefaultInputDetails, useDefaultInputDisplayToClient, useDefaultInputIncrementOrder, useDefaultInputList, useDefaultInputUpdate } from "./DefaultInputs.service"
 
 const PageDefaultInputs = () => {
   const { defaultSubCategoryId } = useParams();
   const toastError = useToastError();
   const toastSuccess = useToastSuccess();
   const navigate = useNavigate();
-  const { t } = useTranslation(['common']);
+  const { t } = useTranslation(['common','formBuilder']);
 
   const { mutate: createDefaultInput, isLoading: createDefaultInputLoading } = useDefaultInputCreate(defaultSubCategoryId,
     {
@@ -44,8 +44,11 @@ const PageDefaultInputs = () => {
   })
 
   const { mutate: incrementOrder, isLoading: isIncrementInputLoading } = useDefaultInputIncrementOrder({
-    onError: (error) => {
-      toastError(error?.response?.data || t('common:use.errorOccurred'));
+    onError: () => {
+      toastError({
+        title:
+         t('formBuilder:incrementErrorMessage'),
+      });
     },
     onSuccess: () => {
       toastSuccess({
@@ -55,8 +58,11 @@ const PageDefaultInputs = () => {
   });
 
   const { mutate: decrementOrder, isLoading: isDecrementInputLoading } = useDefaultInputDecrementOrder({
-    onError: (error) => {
-      toastError(error?.response?.data || t('common:use.errorOccurred'));
+    onError: () => {
+      toastError({
+        title:
+          t('formBuilder:decrementErrorMessage') ,
+      });
     },
     onSuccess: () => {
       toastSuccess({

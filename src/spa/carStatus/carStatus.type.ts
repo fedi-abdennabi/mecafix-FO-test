@@ -1,5 +1,7 @@
-export type status = {
+export type Status = {
     id: number,
+    statusValue: string,
     statusName: string,
-    hasSpecificValue:string | boolean,
+    hasSpecificValue:string | boolean | number,
+    folderId:number;
 }

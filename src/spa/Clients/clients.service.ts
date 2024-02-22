@@ -21,6 +21,7 @@ const ClientKeys = createQueryKeys('ClientService', {
 });
 type ClientKeys = inferQueryKeys<typeof ClientKeys>;
 
+
 export const useClientList = (
   { search = '', orderBy = '', order = '', page = 1 } = {},
   config: UseQueryOptions<
@@ -33,7 +34,7 @@ export const useClientList = (
   const result = useQuery(
     ClientKeys.list({ search, orderBy, order, page }).queryKey,
     (): Promise<ClientList> =>
-      axios.get("admin/clients/", {
+      axios.get("admin/clients", {
         params: { search, orderBy, order, page },
       }),
     { keepPreviousData: true, ...config }
@@ -124,4 +125,5 @@ export const useClientRemove = (
     },
   });
 };
+
 

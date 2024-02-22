@@ -1,27 +1,14 @@
 import React, { useState } from 'react';
 
-import {
-  Box,
-  BoxProps,
-  Flex,
-  LinkOverlay,
-  Progress,
-  Show,
-  Stack,
-  Text,
-} from '@chakra-ui/react';
+import { Box, BoxProps, Stack } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import {
-  HiBriefcase,
-  HiCloud,
   HiHome,
   HiMenu,
   HiOfficeBuilding,
   HiOutlineAdjustments,
   HiOutlineCurrencyDollar,
-  HiOutlineViewGrid,
   HiShieldCheck,
-  HiTranslate,
   HiUser,
   HiUserGroup,
 } from 'react-icons/hi';
@@ -78,8 +65,7 @@ export const MainMenu = ({ ...rest }) => {
     localStorage.getItem('accountId')
   );
   const { t } = useTranslation(['mainMenu', 'common', 'payment', 'billing']);
-  const { account, isAdmin, isManager, isSuperAdmin } =
-    useAccount();
+  const { isAdmin, isSuperAdmin, isClient } = useAccount();
   const [isFlotteOpen, setIsFlotteOpen] = useState(false);
   const { pathname } = useLocation();
   let isActiveItem = false;
@@ -100,6 +86,18 @@ export const MainMenu = ({ ...rest }) => {
 
   return (
     <Stack spacing="1" {...rest}>
+      {/* client menu  */}
+      {isClient && (
+        <MainMenuItem
+          baseHref="/client/home"
+          style={{ paddingLeft: '30px' }}
+          to="/client/home"
+          display={'flex'}
+        >
+          <HiHome size={'1.3rem'} style={{ marginRight: '7px' }} />{' '}
+          {t('mainMenu:Home')}
+        </MainMenuItem>
+      )}
       {/* admin menu  */}
       {isAdmin && (
         <>
@@ -113,18 +111,18 @@ export const MainMenu = ({ ...rest }) => {
             {t('mainMenu:Home')}
           </MainMenuItem>
           <MainMenuItem
-            baseHref="/admin/Park"
+            baseHref="/admin/Park-404"
             style={{ paddingLeft: '30px' }}
-            to="/admin/Park"
+            to="/admin/Park-404"
             display={'flex'}
           >
             <HiOfficeBuilding size={'1.3rem'} style={{ marginRight: '7px' }} />{' '}
             {t('mainMenu:Park')}
           </MainMenuItem>
           <MainMenuItem
-            baseHref="/admin/Clients"
+            baseHref="/admin/Clients-404"
             style={{ paddingLeft: '30px' }}
-            to="/admin/Clients"
+            to="/admin/Clients-404"
             display={'flex'}
           >
             <HiUser size={'1.3rem'} style={{ marginRight: '7px' }} />{' '}
@@ -145,10 +143,7 @@ export const MainMenu = ({ ...rest }) => {
             to="/admin/payment"
             display={'flex'}
           >
-            <HiShieldCheck
-              size={'1.3rem'}
-              style={{ marginRight: '7px' }}
-            />{' '}
+            <HiShieldCheck size={'1.3rem'} style={{ marginRight: '7px' }} />{' '}
             {t('mainMenu:Subscriptions')}
           </MainMenuItem>
           <MainMenuItem
@@ -169,13 +164,9 @@ export const MainMenu = ({ ...rest }) => {
             to="/admin/categories"
             display={'flex'}
           >
-            <HiShieldCheck
-              size={'1.3rem'}
-              style={{ marginRight: '7px' }}
-            />{' '}
+            <HiShieldCheck size={'1.3rem'} style={{ marginRight: '7px' }} />{' '}
             Categories
           </MainMenuItem>
-
         </>
       )}
 
@@ -210,9 +201,9 @@ export const MainMenu = ({ ...rest }) => {
             {t('mainMenu:UsersManagement')}
           </MainMenuItem>
           <MainMenuItem
-            baseHref="/superAdmin/configuration"
+            baseHref="/superAdmin/configuration-404"
             style={{ paddingLeft: '30px' }}
-            to="/superAdmin/configuration"
+            to="/superAdmin/configuration-404"
             display={'flex'}
           >
             <HiOutlineAdjustments
@@ -248,7 +239,6 @@ export const MainMenu = ({ ...rest }) => {
             <HiMenu size={'1.3rem'} style={{ marginRight: '7px' }} />{' '}
             {t('mainMenu:categories')}
           </MainMenuItem>
-
         </>
       )}
     </Stack>

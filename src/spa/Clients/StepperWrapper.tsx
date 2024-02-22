@@ -6,7 +6,15 @@ import { FC } from "react";
 interface StepperWrapperProps extends StackProps{ 
     title : string,
 }
-export const StepperWrapper : FC<StepperWrapperProps> = ({ title , children, ...rest }) => (
+export const StepperWrapper: FC<StepperWrapperProps> = ({ title, children, ...rest }) => {
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  return (
     <Stack {...rest}>
       {title && <Heading fontSize="md">{title}</Heading>}
       <Box bg="gray.50" p="4" borderRadius="md">
@@ -16,9 +24,10 @@ export const StepperWrapper : FC<StepperWrapperProps> = ({ title , children, ...
           </Box>
           {children}
           <Box textAlign="right">
-            <NextButton />
+            <NextButton onClick={scrollToTop} />
           </Box>
         </Grid>
       </Box>
     </Stack>
   );
+};

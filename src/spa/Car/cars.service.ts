@@ -59,7 +59,7 @@ import {
   };
 
   export const useCarCreate = (
-    config: UseMutationOptions<TODO, AxiosError, TODO> = {}
+    config: UseMutationOptions<Car, AxiosError, Car> = {}
   ) => {
     const queryCar = useQueryClient();
     return useMutation((payload) => axios.post('admin/cars/create', payload), {

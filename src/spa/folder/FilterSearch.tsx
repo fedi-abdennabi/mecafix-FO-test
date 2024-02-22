@@ -1,6 +1,6 @@
 import { Text } from "@chakra-ui/react"
 
-export const DrawerSearch=()=>{return<Text>hello world !</Text>}
+export const DrawerSearch=()=>{return<Text></Text>}
 
 
 // import { Box, Button, Divider, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Flex, FormControl, FormLabel, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Radio, RadioGroup, Stack, Tab, useDisclosure } from "@chakra-ui/react"

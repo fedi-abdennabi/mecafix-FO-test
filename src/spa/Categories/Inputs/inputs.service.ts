@@ -35,7 +35,7 @@ export const useInputList = (
         ...config,
         cacheTime: 0,
         staleTime: 0,
-        refetchOnWindowFocus: false, 
+        refetchOnWindowFocus: false,
       };
     const fetchInput = (): Promise<DefaultInput[]> => {
         return Axios.get(`admin/input/all/${subCategoryId}`);
@@ -70,7 +70,7 @@ export const useInputDetails = (config?: UseQueryOptions<Input, AxiosError, Inpu
         ...config,
         cacheTime: 0,
         staleTime: 0,
-        refetchOnWindowFocus: false, 
+        refetchOnWindowFocus: false,
       };
     const GetDetails = (inputId: number | string) => {
         return useQuery(

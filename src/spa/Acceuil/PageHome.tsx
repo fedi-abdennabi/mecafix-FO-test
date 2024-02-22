@@ -42,9 +42,9 @@ const PageHome = () => {
         search,
         orderBy: sort.by,
         order: sort.order,
-        });
-    
-    
+    });
+
+
     return (
         <Page containerSize="full">
             <PageContent>
@@ -62,7 +62,7 @@ const PageHome = () => {
                     </Flex>
                     <Flex>
                         <Button onClick={() => navigate("/admin/Clients/addClient")} colorScheme='blue' ml={"12px"} mr={"12px"} w={"200px"} h={"100px"} mt={"10px"} ><HiUserAdd size={"50px"} /></Button>
-                        <Button onClick={() => navigate("/admin/card")} colorScheme='blue' ml={"12px"} mr={"12px"} w={"200px"} h={"100px"} mt={"10px"} ><HiTruck size={"50px"} /></Button>
+                        <Button onClick={() => navigate("/admin/card-404")} colorScheme='blue' ml={"12px"} mr={"12px"} w={"200px"} h={"100px"} mt={"10px"} ><HiTruck size={"50px"} /></Button>
                         <Button onClick={() => navigate("/admin/folder/generatepdf")} colorScheme='blue' ml={"12px"} mr={"12px"} w={"200px"} h={"100px"} mt={"10px"} ><HiDocumentAdd size={"50px"} /></Button>
                     </Flex>
                     <Stack direction={'row'} justifyContent='space-between'>
@@ -70,17 +70,17 @@ const PageHome = () => {
                             {t('mainMenu:YourActivity')} :
                         </Heading>
                         <Stack direction={'row'}>
-                        <DrawerSearch/>
-                        <Sort
-                            sort={sort}
-                            onChange={setSort}
-                            options={sortOptions}
-                            ascIcon={<FaSortUp />}
-                            descIcon={<FaSortDown />}
-                        />
+                            <DrawerSearch />
+                            <Sort
+                                sort={sort}
+                                onChange={setSort}
+                                options={sortOptions}
+                                ascIcon={<FaSortUp />}
+                                descIcon={<FaSortDown />}
+                            />
                         </Stack>
                     </Stack>
-           
+
                     {isFolderLoading && (
                         <Center>
                             <Spinner size="xl" color="blue" />
@@ -89,17 +89,20 @@ const PageHome = () => {
                     {!isFolderLoading && (
                         <DataList overflowY="scroll" flexWrap="wrap">
                             <DataListHeader>
-                                <DataListCell colName="number" colWidth={'25%'}>
+                                <DataListCell colName="number" colWidth={'20%'}>
                                     {t('mainMenu:folderNumber')}
                                 </DataListCell>
-                                <DataListCell colName="Client" colWidth={'25%'}>
+                                <DataListCell colName="Client" colWidth={'20%'}>
                                     {t('mainMenu:client')}
                                 </DataListCell>
-                                <DataListCell mr={2} colName="model" colWidth={'25%'}>
+                                <DataListCell  colName="model" colWidth={'20%'}>
                                     {t('mainMenu:model')}
                                 </DataListCell>
-                                <DataListCell mr={2} colName="registration" colWidth={'25%'}>
+                                <DataListCell  colName="registration" colWidth={'20%'}>
                                     {t('mainMenu:registration')}
+                                </DataListCell>
+                                <DataListCell  colName="Status" colWidth={'20%'}>
+                                    Status
                                 </DataListCell>
                             </DataListHeader>
                             {folderList?.map((folder) => (
@@ -119,6 +122,9 @@ const PageHome = () => {
                                         </DataListCell>
                                         <DataListCell colName="registration">
                                             {folder?.car?.immatriculation}
+                                        </DataListCell>
+                                        <DataListCell colName="Status">
+                                            {folder?.statusValue}
                                         </DataListCell>
                                     </DataListRow>
                                 </button>

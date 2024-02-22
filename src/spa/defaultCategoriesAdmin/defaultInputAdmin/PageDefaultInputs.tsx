@@ -21,7 +21,7 @@ const PageDefaultInputs = () => {
     const toastError = useToastError();
     const toastSuccess = useToastSuccess();
     const navigate = useNavigate();
-    const { t } = useTranslation(['common']);
+    const { t } = useTranslation(['common','formBuilder']);
 
     const { mutate: createDefaultInput, isLoading: createDefaultInputLoading } = useDefaultInputCreate(defaultSubCategoryId, {
         onError: (error) => {
@@ -39,25 +39,31 @@ const PageDefaultInputs = () => {
     });
 
     const { mutate: incrementOrder, isLoading: isIncrementInputLoading } = useDefaultInputIncrementOrder({
-        onError: (error) => {
-            toastError(error?.response?.data || t('common:use.errorOccurred'));
-        },
-        onSuccess: () => {
-            toastSuccess({
-                title: t('common:Inputs.SuccessUpdated'),
-            });
-        },
+      onError: () => {
+        toastError({
+          title:
+           t('formBuilder:incrementErrorMessage'),
+        });
+      },
+      onSuccess: () => {
+        toastSuccess({
+          title: t('common:Inputs.SuccessUpdated'),
+        });
+      },
     });
 
     const { mutate: decrementOrder, isLoading: isDecrementInputLoading } = useDefaultInputDecrementOrder({
-        onError: (error) => {
-            toastError(error?.response?.data || t('common:use.errorOccurred'));
-        },
-        onSuccess: () => {
-            toastSuccess({
-                title: t('common:Inputs.SuccessUpdated'),
-            });
-        },
+      onError: () => {
+        toastError({
+          title:
+            t('formBuilder:decrementErrorMessage') ,
+        });
+      },
+      onSuccess: () => {
+        toastSuccess({
+          title: t('common:Inputs.SuccessUpdated'),
+        });
+      },
     });
 
     const { mutate: updateDefaultInput, isLoading: isUpdateInputLoading } = useDefaultInputUpdate(

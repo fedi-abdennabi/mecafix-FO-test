@@ -78,6 +78,20 @@ export const useFolderUpdate = (
   });
 };
 
+export const useAddFolder = (
+  clientId?: number | string, 
+  config: UseMutationOptions<TODO, AxiosError, TODO> = {}
+) => {
+  const queryClient = useQueryClient();
+  return useMutation((payload) => axios.post(`admin/folder/${clientId}/add`, payload), {
+    ...config,
+    onSuccess: (...args) => {
+      queryClient.invalidateQueries(folderKeys.all._def);
+      config?.onSuccess?.(...args);
+    },
+  });
+};
+
 export const useClientFolder = (
   id?: number | string,
   config: UseQueryOptions<

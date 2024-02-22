@@ -43,6 +43,7 @@ const CategoriesActions = ({ defaultCategories, ...rest }: DefaultCategoriesActi
                 onClose();
             },
         })
+
     const { mutate: DefaultCategoriesRemove, ...DefaultCategoriesRemoveData } = useDefaultCategoriesDelete(defaultCategories.id, {
         onSuccess: () => {
             toastSuccess({
@@ -57,6 +58,7 @@ const CategoriesActions = ({ defaultCategories, ...rest }: DefaultCategoriesActi
             onClose();
         },
     });
+
     const removeCategorie = () => DefaultCategoriesRemove(defaultCategories);
     const isRemovalLoading = DefaultCategoriesRemoveData.isLoading;
 
@@ -145,7 +147,7 @@ const PageCategories = () => {
                 {!isDefaultCategoriesLoading && (
                     <DataList overflowY="scroll" flexWrap="wrap">
                         <DataListHeader>
-                            <DataListCell colName="number">{t('common:categories.categoryManagment')}</DataListCell>
+                            <DataListCell colName="number">Id</DataListCell>
                             <DataListCell colName="name">{t('common:categories.categoryName')}</DataListCell>
                             <DataListCell
                                 colName="actions"

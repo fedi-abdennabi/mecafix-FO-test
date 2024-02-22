@@ -152,7 +152,7 @@ const PageDefaultSubCategorie = () => {
                 {!isDefaultSubCategoriesLoading && (
                     <DataList overflowY="scroll" flexWrap="wrap">
                         <DataListHeader>
-                            <DataListCell colName="number">{t('pack:Number')}</DataListCell>
+                            <DataListCell colName="number">Id</DataListCell>
                             <DataListCell colName="name">{t('common:subCategories.SubCategoryName')}</DataListCell>
                             <DataListCell
                                 colName="actions"

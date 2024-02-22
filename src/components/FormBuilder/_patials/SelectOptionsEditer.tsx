@@ -13,14 +13,14 @@ type SelectOptionsEditerProps = {
     },
     options?: SetFieldsValuesOptions | undefined
   ) => void;
-  optionsFormValues?: { labal: string; value: string }[];
+  optionsFormValues?: { label: string; value: string }[];
 };
 
 export const SelectOptionsEditer: FC<SelectOptionsEditerProps> = ({
   updateForm,
   optionsFormValues,
 }) => {
-  const [options, setOptions] = useState<{ labal: string; value: string }[]>(
+  const [options, setOptions] = useState<{ label: string; value: string }[]>(
     optionsFormValues || []
   );
 

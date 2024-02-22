@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { Box, Heading, Stack } from '@chakra-ui/react';
-import { FormizStep, useForm } from '@formiz/core';
+import { FormizStep } from '@formiz/core';
 import { isEmail, isMaxLength, isMinLength, isNumber } from '@formiz/validations';
 import { useTranslation } from 'react-i18next';
 
@@ -13,10 +13,9 @@ import { useNavigate } from 'react-router-dom';
 const ClientForm = () => {
   const { t } = useTranslation(['common', 'account']);
   const [isCompany, setIsCompany] = useState(false);
-  const form = useForm();
   const navigate = useNavigate();
 
-  const handleTypeChange = (selectedValue: any) => {
+  const handleTypeChange = (selectedValue: TODO) => {
     setIsCompany(selectedValue === 'company');
   };
 

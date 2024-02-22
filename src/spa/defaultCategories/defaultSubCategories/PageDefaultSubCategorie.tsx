@@ -24,8 +24,6 @@ const DefaultSubCategoriesActions = ({ defaultSubCategories, ...rest }: DefaultS
     const { isOpen, onOpen, onClose } = useDisclosure();
     const toastError = useToastError();
 
-    const { subCategorieDetails} = useDefaultSubCategoryDetails( defaultSubCategories.id);
-
     const { mutate: updateSubCategorie, isLoading: isUpdateSubCategorieLoading } = useDefaultSubCategoriesUpdate(
         defaultSubCategories.id,
         {
@@ -79,7 +77,7 @@ const DefaultSubCategoriesActions = ({ defaultSubCategories, ...rest }: DefaultS
                     <ModalBody pb={6}>
                         <FormControl>
                             <FormLabel>{t('common:subCategories.SubCategoryName')}</FormLabel>
-                            <Input ref={initialRef} placeholder={t('common:subCategories.SubCategoryPlaceHolder') as string} defaultValue={subCategorieDetails?.subCategoryName} />
+                            <Input ref={initialRef} placeholder={t('common:subCategories.SubCategoryPlaceHolder') as string} defaultValue={defaultSubCategories?.subCategoryName} />
                         </FormControl>
                     </ModalBody>
                     <ModalFooter>
@@ -152,7 +150,7 @@ const PageDefaultSubCategorie = () => {
                 {!isDefaultSubCategoriesLoading && (
                     <DataList overflowY="scroll" flexWrap="wrap">
                         <DataListHeader>
-                            <DataListCell colName="number">{t('pack:Number')}</DataListCell>
+                            <DataListCell colName="number">Id</DataListCell>
                             <DataListCell colName="name">{t('common:subCategories.SubCategoryName')}</DataListCell>
                             <DataListCell
                                 colName="actions"

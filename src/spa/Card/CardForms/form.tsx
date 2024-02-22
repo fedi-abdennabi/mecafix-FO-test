@@ -9,28 +9,53 @@ import { useTranslation } from 'react-i18next';
 import { Clients } from '../../Clients/client.type'
 import { FieldRadios } from '@/components/FieldRadios';
 import { Car } from '@/spa/Car/car.type';
+import { useAddFolder } from '@/spa/folder/folder.service';
+import { useNavigate } from 'react-router-dom';
+import { useToastError, useToastSuccess } from '@/components/Toast';
+import { RecordView } from '../RecordView';
 interface selectedClientProps {
     selectedClient: Clients;
 }
 
-export const Form : FC<selectedClientProps> = ({ selectedClient }) => {
+export const Form: FC<selectedClientProps> = ({ selectedClient }) => {
+    const toastError = useToastError();
+    const toastSuccess = useToastSuccess();
+    const navigate = useNavigate();
     const { t } = useTranslation(['common', 'account']);
     const [fields, setFields] = useState<ReactElement[]>([]);
     const addField = () => {
         setFields([...fields, <FieldImage64bit key={fields.length} name={`test${fields.length}`} />]);
     };
-
     const [selectedCar, setSelectedCar] = useState(selectedClient?.car[0]);
-
     const handleCarSelection = (event: TODO) => {
         const selectedCarId = event.target.value;
         const car = selectedClient?.car.find(c => c.id.toString() === selectedCarId);
         setSelectedCar(car);
     };
+    const clientId = selectedClient.id;
+    const { mutate: addFolder } = useAddFolder(clientId, {
+        onError: (error) => {
+            if (error.response) {
+                toastError({
+                    title:
+                        (error?.response?.data as string) ||
+                        t('common:use.errorOccurred'),
+                });
+            }
+        },
+        onSuccess: () => {
+            toastSuccess({
+                title: t('common:folder.SuccessAdd') as string,
+            });
+            navigate(-1);
+        },
+    });
+    const handleSubmit = (values: TODO) => {
+        addFolder({ ...values, clientId });
+    };
 
-    console.log(selectedClient.car);
     return (
-        <Formiz autoForm >
+        <Formiz autoForm onValidSubmit={handleSubmit}>
             <Box
                 p="6"
                 borderRadius="md"
@@ -52,13 +77,13 @@ export const Form : FC<selectedClientProps> = ({ selectedClient }) => {
                         {selectedCar && (
                             <>
                                 <Flex direction='row'>
-                                    <Box as='button' borderRadius='lg' bg='white' color='black' px={4} h={8} mr={4} name='model' bgColor='gray.100'>
+                                    <Box borderRadius='lg' bg='white' color='black' px={4} py={2} mr={4} bgColor='gray.100'>
                                         {selectedCar.model}
                                     </Box>
-                                    <Box as='button' borderRadius='lg' bg='white' color='black' px={4} h={8} mr={4} name='brand' bgColor='gray.100'>
+                                    <Box borderRadius='lg' bg='white' color='black' px={4} py={2} mr={4} bgColor='gray.100'>
                                         {selectedCar.brand}
                                     </Box>
-                                    <Box as='button' borderRadius='lg' bg='white' color='black' px={4} h={8} mr={4} name='immatriculation' bgColor='gray.100'>
+                                    <Box borderRadius='lg' bg='white' color='black' px={4} py={2} mr={4} bgColor='gray.100'>
                                         {selectedCar.immatriculation}
                                     </Box>
                                 </Flex>
@@ -66,15 +91,15 @@ export const Form : FC<selectedClientProps> = ({ selectedClient }) => {
                                     name="mileage"
                                     label={t('account:carte.mileage')}
                                     defaultValue={selectedCar.mileage}
-                                /> 
+                                />
                             </>
                         )}
                         <FieldRadios
-                            name="Dépanneuse"
+                            name="panne"
                             label={t('account:carte.fault')}
                             options={[
-                                { value: 'oui', label: t('account:carte.fault-response.1') },
-                                { value: 'non', label: t('account:carte.fault-response.0') },
+                                { value: '1', label: t('account:carte.fault-response.1') },
+                                { value: '0', label: t('account:carte.fault-response.0') },
                             ]}
                         />
                         <Heading size="sm">Date</Heading>
@@ -87,13 +112,18 @@ export const Form : FC<selectedClientProps> = ({ selectedClient }) => {
                             </Box>
                         </Flex>
                         <Heading size="sm">{t('account:carte.image')}</Heading>
-                        <Flex >
-                            <Box w='30%' >
-                                <Button style={{ margin: '0 8px' }} colorScheme='gray' onClick={addField}>{t('account:carte.addImage')}</Button>
+                        <Flex direction={{ base: 'column', sm: 'column' }} alignItems="flex-start">
+                            <Box >
+                                <Button colorScheme='gray' mb="4" onClick={addField}>{t('account:carte.addImage')}</Button>
                             </Box>
-                            {/* <Spacer /> */}
-                            <Box w='70%'>
-                                {fields.map(field => field)}
+                            <Box width="100%" overflowX="scroll">
+                                <Flex direction="row">
+                                    {fields.map((field, index) => (
+                                        <Box key={index} marginRight="10px">
+                                            {field}
+                                        </Box>
+                                    ))}
+                                </Flex>
                             </Box>
                         </Flex>
                         <Tabs variant='soft-rounded' colorScheme='blue'>
@@ -106,11 +136,11 @@ export const Form : FC<selectedClientProps> = ({ selectedClient }) => {
                                     <Textarea placeholder={t('account:carte.note-placeholder')} defaultValue={selectedClient?.folder[0]?.notes} />
                                 </TabPanel>
                                 <TabPanel>
-                                    <p>audio</p>
+                                    <RecordView />
                                 </TabPanel>
                             </TabPanels>
                         </Tabs>
-                        <Button style={{ margin: '0 8px' }} colorScheme='blue'>{t('account:carte.submit-button')}</Button>
+                        <Button style={{ margin: '0 8px' }} colorScheme='blue' type='submit'>{t('account:carte.submit-button')}</Button>
                     </Stack>
                 )}
             </Box>

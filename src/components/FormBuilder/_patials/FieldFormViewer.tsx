@@ -10,6 +10,7 @@ import { FieldSelector } from '../fieldSelector';
 import FieldInputForm from '../FormForEachField/FieldInputForm';
 import FieldOptionsForm from '../FormForEachField/FieldOptionsForm';
 import { DefaultInput } from '@/spa/defaultCategories/defaultInput/DefaultInputs.type';
+import { useTranslation } from 'react-i18next';
 
 interface FieldFormViewerProps {
   type: InputType,
@@ -57,8 +58,8 @@ export const FieldFormViewer: FC<FieldFormViewerProps> = ({
   const [isOpenInputForm, setIsOpenInputForm] = useState(false);
   const [isOpenOptionsForm, setIsOpenOptions] = useState(false);
   const [currentInputValue, setCurrentInputValue] = useState(value);
-
-  const leftValue = !principalImage ? "73%" : "85%";
+  const {t}=useTranslation(['formBuilder']);
+  const leftValue = !principalImage ? { base: "55%", sm: "55%", md: "55%", lg: "67%", xl: "73%" } : "85%";
 
   const handleInputChange = (e: TODO) => {
     setCurrentInputValue(e);
@@ -101,7 +102,7 @@ export const FieldFormViewer: FC<FieldFormViewerProps> = ({
               icon={<Icon icon={FiTrash} />}
               position="absolute"
               top="0"
-              left="91%"
+              left={{ base: "85%", sm: "85%", md: "85%", lg: "91%", xl: "91%" }}
               zIndex={99}
               size="2"
             />
@@ -120,18 +121,18 @@ export const FieldFormViewer: FC<FieldFormViewerProps> = ({
           onClick={handleEditForm}
           position="absolute"
           top="0"
-          left="97%"
+          left={{ base: "95%", sm: "95%", md: "95%", lg: "97%", xl: "97%" }}
           zIndex={99}
           size="2"
         />
 
         {!principalImage && <IconButton
-          aria-label="orderUp"
+          aria-label="orderDown"
           icon={<Icon icon={FiArrowDown} />}
           position="absolute"
           onClick={handleIncrementOrder}
           top="0"
-          left="85%"
+          left={{ base: "75%", sm: "75%", md: "75%", lg: "85%", xl: "85%" }}
           zIndex={99}
           size="2"
         />}
@@ -142,7 +143,7 @@ export const FieldFormViewer: FC<FieldFormViewerProps> = ({
           position="absolute"
           onClick={handleDecrementOrder}
           top="0"
-          left="79%"
+          left={{ base: "65%", sm: "65%", md: "65%", lg: "79%", xl: "79%" }}
           zIndex={99}
           size="2"
         />
@@ -161,8 +162,8 @@ export const FieldFormViewer: FC<FieldFormViewerProps> = ({
 
         {!!RenderInput && <RenderInput onClick={() => setIsValueChange(true)} onChange={handleInputChange} name={name} type={type} defaultValue={currentInputValue} {...rest} />}
         <Stack direction={'row'} justifyContent={'flex-end'}>
-          {isValueChange && <Button onClick={() => setIsValueChange(false)} colorScheme='blackAlpha' size={'xs'} >Cancel</Button>}
-          {isValueChange && <Button onClick={() => saveFieldValue()} colorScheme='whatsapp' size={'xs'} px={'4'}>Save</Button>}
+          {isValueChange && <Button onClick={() => setIsValueChange(false)} colorScheme='blackAlpha' size={'xs'} >{t('formBuilder:Cancel')}</Button>}
+          {isValueChange && <Button onClick={() => saveFieldValue()} colorScheme='whatsapp' size={'xs'} px={'4'}>{t('formBuilder:Save')}</Button>}
         </Stack>
       </Box>
     </>

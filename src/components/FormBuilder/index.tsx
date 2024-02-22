@@ -7,9 +7,10 @@ import { FieldEditor } from './_patials/FieldEditor';
 import { FieldViewer } from './_patials/FieldViewer';
 import { useAccount } from '@/spa/account/account.service';
 import { DefaultInput } from '@/spa/defaultCategories/defaultInput/DefaultInputs.type';
+import { useTranslation } from 'react-i18next';
 
 interface FormBuilderProps {
-  subCategoryId?:number|string,
+  subCategoryId?: number | string,
   getDetails: TODO,
   createInput?: TODO,
   createInputLoading?: boolean,
@@ -41,10 +42,11 @@ export const FormBuilder: FC<FormBuilderProps> = ({
   createInputLoading,
   defaultInputList,
   changeDisplayStatus,
-  
+
 }) => {
 
   const account = useAccount();
+  const { t } = useTranslation(['formBuilder']);
   const [isDisplayFormEditor, setIsDisplayFormEditor] = useState(false);
   const isAdmin = account.account?.role.roleName === "admin";
 
@@ -52,7 +54,7 @@ export const FormBuilder: FC<FormBuilderProps> = ({
     <FormBuilderProvider>
       <Stack
         spacing="8"
-        direction="row"
+        direction={{ base: "column", md: "row" }}
         w="full"
         bg="gray.100"
         p="4"
@@ -78,7 +80,7 @@ export const FormBuilder: FC<FormBuilderProps> = ({
           />
         </Stack>
       </Stack>
-      {isAdmin && <Button color={"green"} onClick={() => setIsDisplayFormEditor(!isDisplayFormEditor)}>Edit the form</Button>}
+      {isAdmin && <Button color={"green"} onClick={() => setIsDisplayFormEditor(!isDisplayFormEditor)}>{t('formBuilder:EditTheForm')}</Button>}
     </FormBuilderProvider>
   );
 };

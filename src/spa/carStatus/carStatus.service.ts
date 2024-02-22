@@ -1,24 +1,24 @@
-import { UseQueryOptions, useQuery } from "@tanstack/react-query";
-import { status } from "./carStatus.type";
+import { UseMutationOptions, UseQueryOptions, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { Status } from "./carStatus.type";
 import axios, { AxiosError }  from "axios";
 import { createQueryKeys, inferQueryKeys } from "@lukemorales/query-key-factory";
 
 const StatusKeys = createQueryKeys('StatusService', {
-    all: () => ['StatusService'] as const,
+    all: () => ['StatusService', 'folder'] as const,
   });
   type StatusKeys = inferQueryKeys<typeof StatusKeys>;
 
 export const useCarStatusList = (
     config: UseQueryOptions<
-      status[],
+      Status[],
       AxiosError,
-      status[],
+      Status[],
       StatusKeys['all']['queryKey']
     > = {}
   ) => {
     const result = useQuery(
       StatusKeys.all().queryKey,
-      (): Promise<status[]> =>
+      (): Promise<Status[]> =>
         axios.get("admin/status/"),
       { keepPreviousData: true, ...config }
     );
@@ -26,4 +26,18 @@ export const useCarStatusList = (
       statusData: result.data,
       ...result,
     };
+  };
+
+  export const useFolderStatusUpdate = (
+    folderId?: string,
+    config: UseMutationOptions<string, AxiosError, {inputValue?:string,statusId?:number}> = {}
+  ) => {
+    const queryClient = useQueryClient();
+    return useMutation((payload) => axios.put(`admin/folder/status/update/${folderId}`, payload), {
+      ...config,
+      onSuccess: (...args) => {
+        queryClient.invalidateQueries(StatusKeys.all._def);
+        config?.onSuccess?.(...args);
+      },
+    });
   };

@@ -2,7 +2,6 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { ErrorPage } from '@/components/ErrorPage';
 import AcceuilRoutes from '../Acceuil/HomeRoutes';
-import ClientsRoutes from '../Clients/ClientsRoutes';
 import PaymentRoutes from '../Paiement/PaymentRoutes';
 import ParkRoutes from '../Park/ParkRoutes';
 import { useAccount } from '../account/account.service';
@@ -12,6 +11,7 @@ import { AdminRouteGuard, AuthenticatedRouteGuard } from '../router/guards';
 import FolderRoutes from '../folder/folder.route';
 import CardRoutes from '../Card/card.route';
 import CategoriesRoutes from '../defaultCategoriesAdmin/CategoriesRoutes';
+import ClientsRoutes from '../Clients/ClientsRoutes';
 
 const AdminRoutes = () => {
   const { isLoading: accountLoading } = useAccount();
@@ -27,6 +27,7 @@ const AdminRoutes = () => {
               </AuthenticatedRouteGuard>
             }
           />
+
           <Route
             path="home/*"
             element={
@@ -35,6 +36,7 @@ const AdminRoutes = () => {
               </AdminRouteGuard>
             }
           />
+
           <Route
             path="Park/*"
             element={
@@ -60,6 +62,7 @@ const AdminRoutes = () => {
               </AdminRouteGuard>
             }
           />
+
           <Route
             path="Clients/*"
             element={
@@ -67,7 +70,6 @@ const AdminRoutes = () => {
                 <ClientsRoutes />
               </AdminRouteGuard>
             }
-
           />
 
           <Route
@@ -78,6 +80,7 @@ const AdminRoutes = () => {
               </AdminRouteGuard>
             }
           />
+
           <Route
             path="card/*"
             element={

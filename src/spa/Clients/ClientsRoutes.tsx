@@ -7,13 +7,14 @@ import PageUpdateClient from "./PageClientUpdate";
 import { PageAddCar } from "./PageAddCar";
 import { PageUpdateCar } from "./PageUpdateCar";
 import PageAddFolder from "./PageAddFolder";
+import { PageFolder } from "../folder/PageFolder";
 
 const ClientsRoutes = () => {
     return (
         <>
             <Routes>
                 <Route
-                    path=""
+                    path="/"
                     element={
                         <AdminRouteGuard>
                           <PageClients />
@@ -65,6 +66,14 @@ const ClientsRoutes = () => {
                     element={
                         <AdminRouteGuard>
                           <PageAddFolder/>
+                        </AdminRouteGuard>
+                    }
+                />
+                <Route
+                    path="/folder/:folderId"
+                    element={
+                        <AdminRouteGuard>
+                          <PageFolder/>
                         </AdminRouteGuard>
                     }
                 />

@@ -27,7 +27,7 @@ import { SelectOptionsEditer } from './SelectOptionsEditer';
 
 const SelectBuilderEditor = () => {
   const form = useForm();
-  
+
   const {
     setFieldsValues,
     values: { options = [] },
@@ -43,7 +43,6 @@ const SelectBuilderEditor = () => {
         <PopoverContent>
           <PopoverArrow />
           <PopoverCloseButton />
-          <PopoverHeader>Confirmation!</PopoverHeader>
           <PopoverBody>
             <SelectOptionsEditer
               updateForm={setFieldsValues}

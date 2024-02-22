@@ -9,6 +9,7 @@ export type FieldBooleanCheckboxProps = FieldProps &
   FormGroupProps & {
     optionLabel?: string;
     size?: 'sm' | 'md' | 'lg';
+    value?:boolean;
   };
 
 export const FieldBooleanCheckbox = (props: FieldBooleanCheckboxProps) => {

@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 import { useToastError, useToastSuccess } from "@/components/Toast";
 import { Categories } from "./Categories.type";
 import { useEffect, useRef, useState } from "react";
-import { useDefaultCategoriesDelete, useDefaultCategoriesList, useDefaultCategoriesUpdate, useDefaultCategoryDetails } from "./Categories.service";
+import { useDefaultCategoriesDelete, useDefaultCategoriesList, useDefaultCategoriesUpdate } from "./Categories.service";
 import ModalCreateCategories from "./ModalCreateCategories";
 import { ConfirmMenuItem } from "@/components/ConfirmMenuItem";
 import { ActionsButton } from "@/components/ActionsButton";
@@ -23,7 +23,6 @@ const CategoriesActions = ({ defaultCategories, ...rest }: DefaultCategoriesActi
     const initialRef = useRef<HTMLInputElement>(null);
     const toastError = useToastError();
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const { categorieDetails } = useDefaultCategoryDetails(defaultCategories.id);
     const { mutate: updateCategorie, isLoading: isUpdateCategorieLoading } = useDefaultCategoriesUpdate(
         defaultCategories.id,
         {
@@ -43,6 +42,7 @@ const CategoriesActions = ({ defaultCategories, ...rest }: DefaultCategoriesActi
                 onClose();
             },
         })
+
     const { mutate: DefaultCategoriesRemove, ...DefaultCategoriesRemoveData } = useDefaultCategoriesDelete(defaultCategories.id, {
         onSuccess: () => {
             toastSuccess({
@@ -57,6 +57,7 @@ const CategoriesActions = ({ defaultCategories, ...rest }: DefaultCategoriesActi
             onClose();
         },
     });
+
     const removeCategorie = () => DefaultCategoriesRemove(defaultCategories);
     const isRemovalLoading = DefaultCategoriesRemoveData.isLoading;
     const updateDefaultCategory = () => {
@@ -78,7 +79,7 @@ const CategoriesActions = ({ defaultCategories, ...rest }: DefaultCategoriesActi
                     <ModalBody pb={6}>
                         <FormControl>
                             <FormLabel>{t('common:categories.categoryName')}</FormLabel>
-                            <Input ref={initialRef} placeholder={t('common:categories.categoryPlaceHolder') as string} defaultValue={categorieDetails?.categoryName} />
+                            <Input ref={initialRef} placeholder={t('common:categories.categoryPlaceHolder') as string} defaultValue={defaultCategories?.categoryName} />
                         </FormControl>
                     </ModalBody>
                     <ModalFooter>
@@ -142,7 +143,7 @@ const PageCategories = () => {
                 {!isDefaultCategoriesLoading && (
                     <DataList overflowY="scroll" flexWrap="wrap">
                         <DataListHeader>
-                            <DataListCell colName="number">{t('common:categories.categoryManagment')}</DataListCell>
+                            <DataListCell colName="number">Id</DataListCell>
                             <DataListCell colName="name">{t('common:categories.categoryName')}</DataListCell>
                             <DataListCell
                                 colName="actions"

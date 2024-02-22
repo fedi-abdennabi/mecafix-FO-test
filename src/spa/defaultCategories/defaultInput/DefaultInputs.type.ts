@@ -6,7 +6,7 @@ export type DefaultInput = {
     inputOrder?: number | null ; 
     subCategoryId?: number,
     folder_id?:number,
-    options?:{ labal: string; value: string; }[], 
+    options?:{ label: string; value: string; }[], 
     helper?:string | null,     
     sub_category_default_id?:number, 
     label?:string,

@@ -19,6 +19,7 @@ export const useLogin = (
       ...config,
       onSuccess: (data, ...rest) => {
         localStorage.setItem('accountId', data.user.id.toString());
+        localStorage.setItem('role', data.user.role.roleName.toString());
         localStorage.setItem('packPremium', data.user.isPremium.toString());
         updateToken(data.id_token);
         if (config.onSuccess) {

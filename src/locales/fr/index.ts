@@ -23,7 +23,7 @@ import tmContract from './tmContract.json';
 import users from './users.json';
 import DashboardTranslate from './DashboardTranslate.json';
 import folder from './folder.json';
-
+import formBuilder from './formBuilder.json';
 
 export default {
   filter,
@@ -51,4 +51,5 @@ export default {
   billing,
   DashboardTranslate,
   car,
+  formBuilder,
 } as const;

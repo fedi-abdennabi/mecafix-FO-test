@@ -2,7 +2,8 @@ export type SubCategorys = {
     id: number;
     subCategoryName: string;
     categoryId?:number;
-    done:boolean
+    done:boolean; 
+    display:boolean;
 };
 
 export type SubCategorysListResult = {

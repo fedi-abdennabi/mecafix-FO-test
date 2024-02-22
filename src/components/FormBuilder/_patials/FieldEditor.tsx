@@ -12,27 +12,29 @@ import { FieldSelector } from '../fieldSelector';
 import { FieldPropsSelector } from './FieldPropsSelector';
 import { FC, useState } from 'react';
 import ScrollToFirstError from '@/components/ScrollToFirstError';
+import { useTranslation } from 'react-i18next';
 
-interface FieldEditorProps{
-  createInputLoading:TODO ,
-  createInput:TODO
+interface FieldEditorProps {
+  createInputLoading: TODO,
+  createInput: TODO
 }
 
-export const FieldEditor :FC<FieldEditorProps> = ({ createInput,createInputLoading }) => {
+export const FieldEditor: FC<FieldEditorProps> = ({ createInput, createInputLoading }) => {
   const { inputs, updateInputs } = useFormBuilderContext();
   const [invalidForm, setInvalidForm] = useState(false);
+  const { t } = useTranslation(['formBuilder']);
   const form = useForm();
 
   const fieldMappings: { [key: string]: { label: string; icon: string } } = {
-    FieldInput: { label: 'Input', icon: 'icon-input' },
-    FieldSelect: { label: 'Select', icon: 'icon-select' },
-    FieldCheckboxes: { label: 'Checkboxes', icon: 'icon-checkboxes' },
-    FieldImage64bit: { label: 'Image Upload', icon: 'icon-image' },
-    FieldRadios: { label: 'Radio Buttons', icon: 'icon-radio' },
-    FieldTextarea: { label: 'Textarea', icon: 'icon-textarea' },
-    FieldDayPicker: { label: 'Date Picker', icon: 'icon-date' },
-    FieldEditor: { label: 'Text Editor', icon: 'icon-editor' },
-    FieldVideo: { label: 'Video', icon: 'icon-editor' }
+    FieldInput: { label: t('formBuilder:Input'), icon: 'icon-input' },
+    FieldSelect: { label: t('formBuilder:Select'), icon: 'icon-select' },
+    FieldCheckboxes: { label: t('formBuilder:Checkboxes'), icon: 'icon-checkboxes' },
+    FieldImage64bit: { label: t('formBuilder:Image'), icon: 'icon-image' },
+    FieldRadios: { label: t('formBuilder:RadioButtons'), icon: 'icon-radio' },
+    FieldTextarea: { label: t('formBuilder:Textarea'), icon: 'icon-textarea' },
+    FieldDayPicker: { label: t('formBuilder:DatePicker'), icon: 'icon-date' },
+    FieldEditor: { label: t('formBuilder:TextEditor'), icon: 'icon-editor' },
+    FieldVideo: { label: t('formBuilder:Video'), icon: 'icon-editor' }
   };
 
   const {
@@ -57,6 +59,7 @@ export const FieldEditor :FC<FieldEditorProps> = ({ createInput,createInputLoadi
     };
     await createInput(newDefaultInput);
     addNewField(values);
+    form.reset();
   }
 
   return (
@@ -72,29 +75,29 @@ export const FieldEditor :FC<FieldEditorProps> = ({ createInput,createInputLoadi
           <Stack spacing="2" alignItems="flex-start">
             <FieldHidden name="id" defaultValue={faker.datatype.uuid()} />
             <FieldSelect
-              label="Components"
+              label={t('formBuilder:Components')}
               selectProps={{ size: 'sm' }}
               name="type"
               options={componentOptions}
               required
             />
-            <FieldInput size="sm" name="name" label="Name" required />
-            <FieldInput size="sm" name="label" label="Label" required />
+            <FieldInput size="sm" name="inputName" label={t('formBuilder:Name')} required />
+            <FieldInput size="sm" name="label" label={t('formBuilder:Label')} required />
             <FieldBooleanCheckbox
               name="display"
-              label="Display"
-              helper="to specify if this field is display to the client or not"
+              label={t('formBuilder:Display')}
+              helper={t('formBuilder:HelperDisplay')}
             />
             {(type == "FieldImage64bit" || type == "FieldVideo") && <FieldBooleanCheckbox
               name="principalImage"
-              label="principal Image"
-              helper="to specify if this image is principal or not "
+              label={t('formBuilder:principalImage')}
+              helper={t('formBuilder:HelperImage')}
             />}
             <FieldInput
               size="sm"
               name="helper"
-              label="Helper"
-              helper="Small text will show under the field exactly like this text."
+              label={t('formBuilder:Helper')}
+              helper={t('formBuilder:HelperMessage')}
             />
             {!!type && <FieldPropsSelector type={type} />}
             <Button
@@ -106,7 +109,7 @@ export const FieldEditor :FC<FieldEditorProps> = ({ createInput,createInputLoadi
                 setTimeout(() => {
                   setInvalidForm(false);
                 }, 100);
-              }} >add</Button>
+              }} >{t('formBuilder:Add')}</Button>
             {invalidForm && <ScrollToFirstError />}
           </Stack>
         </form>

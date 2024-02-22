@@ -4,7 +4,8 @@
     "update":"Modification véhicule",
     "registration": {
       "label": "Immatriculation",
-      "required": "Immatriculation est obligatoire"
+      "required": "Immatriculation est obligatoire",
+      "invalidFormat":"Format d'immatriculation invalide: 0000-AA-0000"
     },
     "brand": {
       "label": "Marque",
@@ -20,7 +21,7 @@
       "required": "kilométrage est obligatoire"
     },
     "cylinder": "Cylinder",
-    "picture": "image",
+    "picture": "Image",
     "energy": "Energie",
     "no data":"Aucune donnée disponible",
     "successUpdate":"Véhicule mis à jour",
@@ -29,7 +30,7 @@
     "Main vehicle": "Véhicule principal"
   },
   "client": { 
-    "Type": "type: ",
+    "Type": "Type: ",
     "update":"Modification client",
     "title": "Création client",
     "company": { 
@@ -61,7 +62,8 @@
     "RegistrationNumber": "Numéro d'enregistrement",
     "successUpdate":"Client mis à jour",
     "SuccessDelete": "Client supprimé",
-    "sort":"Trier par"
+    "sort":"Trier par",
+    "copyToClipBoard":"Texte copié"
   },
   "button": {
     "Save": "Enregistrer",
@@ -286,8 +288,8 @@
     "title":"Création Carte"
 },
 "folder":{
-  "heading":"Plus d'infors",
-  "contrat":"contrat n°",
+  "heading":"Plus d'informations",
+  "contrat":"Contrat n°",
   "card-button": "Mettre à jour Carte",
   "hashtag-popup-title":"Définissez un Hashtag",
   "hashtag-popup-close":"fermer",
@@ -322,5 +324,9 @@
   "body":"Etes vous sûr(e) de vouloir supprimer ?",
   "yesButton":"Confirmer",
   "noButton":"Annuler"
+},
+"modalSuccessAddFolder":{
+  "modalTitle": "Merci!",
+  "modalContent": "Vos informations ont été soumises avec succès."
 }
 }

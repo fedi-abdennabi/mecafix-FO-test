@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 import { Page, PageContent } from '@/spa/layout';
 
 export const CarForm = () => {
-  const { t, i18n } = useTranslation(['common', 'car', 'account']);
+  const { t } = useTranslation(['common', 'car', 'account']);
 
   useEffect(() => {
     window.scrollTo(0, 0);

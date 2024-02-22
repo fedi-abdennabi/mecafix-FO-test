@@ -4,6 +4,7 @@ import { AdminRouteGuard } from "../router/guards";
 import { GeneratePdf } from "./GeneratePdf";
 import { PageFolder } from "./PageFolder";
 import { PageHistoryFolder } from "./PageHistoryFolder";
+import { PageVisualizeDiagnosis } from "./PageVisualizeDiagnosis";
 
 const FolderRoutes = () => {
     return (
@@ -39,6 +40,14 @@ const FolderRoutes = () => {
                     element={
                         <AdminRouteGuard>
                           <PageHistoryFolder />
+                        </AdminRouteGuard>
+                    }
+                />
+                <Route
+                    path="/folder/:folderId/history/diagnosis"
+                    element={
+                        <AdminRouteGuard>
+                          <PageVisualizeDiagnosis />
                         </AdminRouteGuard>
                     }
                 />

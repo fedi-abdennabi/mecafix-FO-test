@@ -4,7 +4,8 @@
     "update":"Update vehicle",
     "registration": {
       "label": "Registration",
-      "required": "Registration is required !"
+      "required": "Registration is required !",
+      "invalidFormat":"Invalid registration format: 0000-AA-0000"
     },
     "brand": {
       "label":"Brand",
@@ -29,7 +30,7 @@
     "Main vehicle": "Main vehicle"
   },
   "client": {
-    "Type":"type: ",
+    "Type":"Type: ",
     "update": "Update Client",
     "title": "Add new Client",
     "company": { 
@@ -45,8 +46,8 @@
       "isNumber":"Phone Number should be a number"
     },
     "adresse": {
-      "label": "Adresse: ",
-      "required":"Adresse is required"
+      "label": "Adress: ",
+      "required":"Adress is required"
     },
     "city": {
       "label": "City: ",
@@ -61,7 +62,8 @@
     "RegistrationNumber":"Registration number",
     "successUpdate":"Client updated successfully",
     "SuccessDelete": "Client deleted",
-    "sort":"Sort by"
+    "sort":"Sort by",
+    "copyToClipBoard":"Copied to clipboard"
   },
   "button":{ 
     "Save":"Save",
@@ -288,7 +290,7 @@
 },
 "folder":{
   "heading":"More infos",
-  "contrat":"contract no.",
+  "contrat":"Contract no.",
   "card-button":"Update Card",
   "hashtag-popup-title":"Set a Hashtag",
   "hashtag-popup-close":"close",
@@ -323,5 +325,9 @@
   "body":"Are you sure you want to delete?",
   "yesButton":"Confirm",
   "noButton":"Cancel"
+},
+"modalSuccessAddFolder":{
+  "modalTitle": "Thank You!",
+  "modalContent": "Your information has been successfully submitted."
 }
 }

@@ -44,7 +44,7 @@ export const PageUpdateCar = () => {
                 toastSuccess({
                     title: t('account:car.successUpdate'),
                 });
-                navigate(`/admin/clients/showClient/${clientId}`);
+                navigate(`/admin/clients/showClient/${clientId}#car`);
             },
         }
     );
@@ -103,11 +103,13 @@ export const PageUpdateCar = () => {
                                 <FieldInput
                                     name="brand"
                                     label={t('account:car.brand.label')}
+                                    required
                                 />
 
                                 <FieldInput
                                     name="model"
                                     label={t('account:car.model.label')}
+                                    required
                                 />
 
                             </Stack>
@@ -130,6 +132,7 @@ export const PageUpdateCar = () => {
                                         //     message: t('car:data.mileage.tooLong', { min: 10 }),
                                         // },
                                     ]}
+                                    required
                                 />
                             </Stack>
                             <Button style={{ margin: '24px 2px' }} colorScheme='blue' isLoading={updateCarLoading} type='submit' >{t('account:carte.submit-button')}</Button>

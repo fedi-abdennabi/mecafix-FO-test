@@ -80,7 +80,7 @@ const PageAddFolder = () => {
     };
 
     const handleSubmit = (values: Folder) => {
-        const updatedValues = { ...values, images, clientId , address: selectedAddress};
+        const updatedValues = { ...values, images, clientId , position: selectedAddress};
         addFolder(updatedValues);
     };
 
